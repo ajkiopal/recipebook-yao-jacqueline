@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<head>
+    <body>
+        <h1>Recipe Book</h1>
+        <ul>
+            {% for recipe in recipes %}
+            <li><a href="/recipe/{{ recipe.index }}">{{ recipe.name }}</a></li>
+            {% endfor %}
+        </ul>
+    </body>
+</head>
