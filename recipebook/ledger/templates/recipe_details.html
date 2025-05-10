@@ -1,14 +1,18 @@
 <!DOCTYPE html>
+<html>
 <head>
     <title>{{ recipe.name }}</title>
 </head>
 <body>
-    <h1>Recipe Book</h1>
-    <p>ingredients</p>
+    <h1>{{ recipe.name }}</h1>
+    <h2>Ingredients</h2>
     <ul>
-        {% for ingredients in recipe.ingredients %}
-        <li>{{ ingredients.name }}: {{ ingredients.quantity }}</li>
+        {% for recipeingredient in recipe.recipe_ingredients.all %}
+            <li>{{ recipeingredient.ingredient.name }}: {{ recipeingredient.quantity }}</li>
+        {% empty %}
+            <li>No ingredients listed.</li>
         {% endfor %}
     </ul>
+    <a href="{% url 'recipe_list' %}">Back to list</a>
 </body>
 </html>
