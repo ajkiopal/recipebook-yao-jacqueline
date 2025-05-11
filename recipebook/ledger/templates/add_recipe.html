@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1> Add new recipe </h1>
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit"> Create Recipe </button>
+</form>
+<a href="{% url 'recipe_list' %}"> Return to recipe list </a>
+{% endblock %}

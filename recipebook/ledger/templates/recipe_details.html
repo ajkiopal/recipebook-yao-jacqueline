@@ -1,18 +1,31 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>{{ recipe.name }}</title>
-</head>
-<body>
-    <h1>{{ recipe.name }}</h1>
-    <h2>Ingredients</h2>
-    <ul>
-        {% for recipeingredient in recipe.recipe_ingredients.all %}
-            <li>{{ recipeingredient.ingredient.name }}: {{ recipeingredient.quantity }}</li>
-        {% empty %}
-            <li>No ingredients listed.</li>
-        {% endfor %}
-    </ul>
-    <a href="{% url 'recipe_list' %}">Back to list</a>
-</body>
-</html>
+{% extends 'base.html' %}
+
+{% block title %}{{ recipe.name }}{% endblock %}
+
+{% block content %}
+<h1>{{ recipe.name }}</h1>
+<h2>{{ recipe.author }}</h2>
+
+<h3>Ingredients</h3>
+<ul>
+    {% for recipeingredient in recipe.recipe_ingredients.all %}
+        <li>{{ recipeingredient.ingredient.name }}: {{ recipeingredient.quantity }}</li>
+    {% empty %}
+        <li>No ingredients listed.</li>
+    {% endfor %}
+</ul>
+<a href="{% url 'add_ingredient'  recipe.pk %}"> Add an ingredient </a>
+
+<h3>Images</h3>
+<ul>
+    {% for image in recipe.images.all %}
+        <li>
+            <img src="{{ image.image.url }}" alt="{{ image.description}}" style="max-width: 300px;">
+        </li>
+    {% empty %}
+        <li> No images uploaded. </li>
+    {% endfor %}
+    <a href="{% url 'upload_image' recipe.id %}"> Upload a new image </a>
+</ul>
+<a href="{% url 'recipe_list' %}">Back to list</a>
+{% endblock %}
